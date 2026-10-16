@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a1e16">
+<meta name="robots" content="noindex">
+<title>RC Linhas — Mapas publicados</title>
+<link rel="icon" type="image/svg+xml" href="app/icons/icon.svg">
+<link rel="apple-touch-icon" href="app/icons/icon-180.png">
+<style>
+:root{--bg:#f2f5f1;--card:#fff;--ink:#14261d;--muted:#5b7166;--line:#e1e8e3;--accent:#ffd60a;--dark:#0a1e16}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(130deg,#0a1e16,#145234);color:#fff;padding:26px 16px 30px}
+.wrap{max-width:900px;margin:0 auto}
+header .row{display:flex;align-items:center;gap:16px}
+header img.logo{height:58px}header img.ic{height:46px;width:46px;margin-left:auto}
+header p{margin:14px 0 0;color:#cfe3d6}
+.search{margin:-22px auto 0;max-width:900px;padding:0 16px}
+.search input{width:100%;padding:14px 16px;border-radius:14px;border:1px solid var(--line);font-size:16px;box-shadow:0 8px 24px rgba(10,30,22,.12)}
+main{padding:18px 16px 40px}
+.list{display:grid;gap:10px}
+a.item{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--card);border:1px solid var(--line);border-radius:14px;color:inherit;text-decoration:none}
+a.item:hover{border-color:#9cc7ad}
+a.item .pin{width:40px;height:40px;border-radius:11px;flex:none;background:var(--dark) url(app/icons/icon-64.png) center/cover}
+a.item b{display:block;font-size:16px}a.item small{display:block;color:var(--muted);margin-top:2px}
+a.item .go{margin-left:auto;font-weight:700;color:#145234;white-space:nowrap}
+.empty{color:var(--muted);padding:20px 4px}
+.note{margin-top:22px;font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="row"><img class="logo" src="app/logo.png" alt="RC Serviços Agrícolas"><img class="ic" src="app/icons/icon-192.png" alt=""></div>
+  <p>Mapas de linhas publicados — abra no celular e use o GPS no campo.</p>
+</div></header>
+<div class="search"><input id="q" type="search" placeholder="Buscar fazenda, talhão…" aria-label="Buscar"></div>
+<main class="wrap"><div id="list" class="list"></div><p class="note">Os mapas desta página são públicos para quem tiver o link.</p></main>
+<script>
+(function(){
+  var esc=function(v){return String(v==null?'':v).replace(/[&<>'"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c];});};
+  var items=[];
+  function render(){
+    var q=document.getElementById('q').value.toLowerCase().trim();
+    var rows=items.filter(function(p){return !q||[p.title,p.subtitle,p.date_br].join(' ').toLowerCase().indexOf(q)>=0;});
+    document.getElementById('list').innerHTML=rows.map(function(p){
+      return '<a class="item" href="'+encodeURI(p.path)+'"><span class="pin"></span><span><b>'+esc(p.title)+'</b><small>'+esc([p.subtitle,p.date_br].filter(Boolean).join(' • '))+'</small></span><span class="go">Abrir →</span></a>';
+    }).join('')||'<div class="empty">Nenhum mapa encontrado.</div>';
+  }
+  fetch('catalog.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(c){
+    items=(c.projects||[]).slice().sort(function(a,b){return String(b.published_at).localeCompare(String(a.published_at));});render();
+  }).catch(function(){document.getElementById('list').innerHTML='<div class="empty">Nenhum mapa publicado ainda.</div>';});
+  document.getElementById('q').oninput=render;
+})();
+</script>
+</body>
+</html>
