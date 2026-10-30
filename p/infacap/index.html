@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a1e16">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="robots" content="noindex">
+<title>Infacap</title>
+<meta property="og:title" content="Infacap">
+<meta property="og:description" content="Mapa de linhas no Google Satélite com GPS — RC Serviços Agrícolas">
+<link rel="icon" type="image/svg+xml" href="../../app/icons/icon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../app/icons/icon-32.png">
+<link rel="apple-touch-icon" href="../../app/icons/icon-180.png">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="../../app/viewer.css?v=1.0.0-20261030182515">
+</head>
+<body>
+<div id="map" role="region" aria-label="Mapa"></div>
+
+<header class="top">
+  <div class="brand">
+    <img src="../../app/logo.png" alt="RC Serviços Agrícolas">
+    <div class="t"><strong id="title">Carregando…</strong><small id="subtitle"></small></div>
+  </div>
+</header>
+
+<div id="gps" class="gps-chip" aria-live="polite"><i></i><span id="gpsTxt">GPS</span></div>
+
+<div id="panel" class="panel" role="dialog" aria-label="Camadas e informações">
+  <section>
+    <h3>Mapa base</h3>
+    <div class="seg"><button id="baseSat" class="on" type="button">Satélite</button><button id="baseHyb" type="button">Híbrido</button></div>
+  </section>
+  <section><h3>Camadas</h3><div id="layers"></div></section>
+  <section><h3>Resumo</h3><div id="stats" class="stats"></div>
+    <button id="btnShare" class="share" type="button">Compartilhar link</button>
+    <div id="foot" class="foot"></div>
+  </section>
+</div>
+
+<nav class="bar" aria-label="Ações do mapa">
+  <button id="btnFit" class="primary" type="button" aria-label="Ir para o mapeamento">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/><path d="M8 15l8-6M8 11l5-4M11 17l5-4"/></svg>
+    <span>Mapeamento</span></button>
+  <button id="btnMe" type="button" aria-label="Minha posição" aria-pressed="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+    <span>Minha posição</span></button>
+  <button id="btnLayers" type="button" aria-label="Camadas" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg>
+    <span>Camadas</span></button>
+</nav>
+<div id="toast" class="toast" role="status"></div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="data.js?v=1.0.0-20261030182515"></script>
+<script src="../../app/viewer.js?v=1.0.0-20261030182515"></script>
+</body>
+</html>

@@ -47,6 +47,14 @@
    "subtitle": "pachu",
    "date_br": "29/10/2026",
    "published_at": "2026-10-29T16:47:27"
+  },
+  {
+   "slug": "infacap",
+   "path": "p/infacap/",
+   "title": "Infacap",
+   "subtitle": "INfacap",
+   "date_br": "30/10/2026",
+   "published_at": "2026-10-30T18:25:15"
   }
  ],
  "generator": "RC Linhas GPS 1.0.0"
