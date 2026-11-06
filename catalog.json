@@ -55,6 +55,14 @@
    "subtitle": "INfacap",
    "date_br": "30/10/2026",
    "published_at": "2026-10-30T18:25:15"
+  },
+  {
+   "slug": "claraval",
+   "path": "p/claraval/",
+   "title": "CLARAVAL",
+   "subtitle": "CLARAVAL",
+   "date_br": "06/11/2026",
+   "published_at": "2026-11-06T16:29:41"
   }
  ],
  "generator": "RC Linhas GPS 1.0.0"
